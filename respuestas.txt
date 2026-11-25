@@ -1,0 +1,9 @@
+Resultado de (config1 == config2): true, porque config1 y config2 apuntan a la misma referencia en memoria devuelta por AppConfig.getInstance().
+
+Por qué instance debe ser static: Porque pertenece a la clase y no a una instancia individual; como el constructor es private, el método estático getInstance() necesita acceder a ella sin crear un objeto previo.
+
+Ventaja de una única instancia de configuración: Mantiene los ajustes (tema, idioma, etc.) consistentes en toda la aplicación y evita instanciar objetos duplicados de configuración.
+
+Desventaja de la inicialización ansiosa: Crea la instancia al cargar la clase en memoria aunque nunca se llegue a usar, lo cual puede desperdiciar recursos si la inicialización es costosa.
+
+Problema de guardar estado global al crecer la app: Aumenta el acoplamiento entre módulos, dificulta las pruebas unitarias (por estado compartido entre pruebas) y puede causar condiciones de carrera si varios hilos modifican el estado sin sincronización.
